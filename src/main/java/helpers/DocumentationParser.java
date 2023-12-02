@@ -1,5 +1,10 @@
 package helpers;
 
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -122,8 +127,9 @@ public class DocumentationParser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        return removeCommonWords(removeCommentSymbols(extracted.toString()));
+//      Moved text processing to python
+        return extracted.toString();
+//        removeCommentSymbols(extracted.toString()));
     }
 
     /**
@@ -161,7 +167,7 @@ public class DocumentationParser {
      * @param readme - text content of a file
      * @return filtered string containing the file's text
      */
-    public String filterReadmeFile(String readme) {
+    public String filterReadmeFileOld(String readme) {
 //      Remove links
         readme = readme.replaceAll("!\\[[^\\]]*]\\([^)]*\\)", "");
         readme = readme.replaceAll("\\[[^\\]]*]\\([^)]*\\)", "");
@@ -182,6 +188,59 @@ public class DocumentationParser {
         readme = readme.replaceAll("\\n{2,}", "\n");
         return removeCommonWords(readme);
     }
+
+    /**
+     * Updated function to remove unwanted/ not useful piece of text from a Readme file (or .md in general)
+     * @param readme - text content of a file
+     * @return filtered string containing the file's text
+     */
+    public String filterReadmeFile(String readme) {
+        Node doc = Parser.builder().build().parse(readme);
+        return extractText(doc);
+    }
+
+    /**
+     * selects only wanted parts of a md file
+     * @param doc parsed md
+     * @return string representation of the text
+     */
+    private static String extractText(Node doc) {
+        StringBuilder extracted = new StringBuilder();
+        new NodeVisitor(new VisitHandler<>(Heading.class, heading -> {
+            extracted.append(heading.getText());
+        })).visit(doc);
+
+        new NodeVisitor(new VisitHandler<>(Paragraph.class, paragraph -> {
+            for (Node child : paragraph.getChildren()) {
+                if (!(child instanceof Image) && !(child instanceof Link)) {
+                    extracted.append(child.getChars());
+
+                }
+            }
+        })).visit(doc);
+
+        new NodeVisitor(new VisitHandler<>(ListBlock.class, listBlock -> {
+            extracted.append(extractText(listBlock)).append(System.lineSeparator());
+        })).visit(doc);
+
+        new NodeVisitor(new VisitHandler<>(Emphasis.class, emphasis -> {
+            extracted.append(emphasis.getText()).append(System.lineSeparator());
+        })).visit(doc);
+
+        new NodeVisitor(new VisitHandler<>(StrongEmphasis.class, strongEmphasis -> {
+            extracted.append(strongEmphasis.getText()).append(System.lineSeparator());
+        })).visit(doc);
+
+        new NodeVisitor(new VisitHandler<>(BlockQuote.class, blockQuote -> {
+            extracted.append(blockQuote.getContentChars()).append(System.lineSeparator());
+        })).visit(doc);
+
+        new NodeVisitor(new VisitHandler<>(Link.class, link -> {
+            extracted.append(link.getUrl()).append(System.lineSeparator());
+        })).visit(doc);
+        return extracted.toString();
+    }
+
     // Tried to use Apache Lucene to get the list of end words, but I couldn't find the exact package
     private void populateList() {
         wordsToFilter.add("and");

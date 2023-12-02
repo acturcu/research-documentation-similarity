@@ -69,7 +69,7 @@ public class GetDocumentation {
 
             byte[] byteContent = readmeString.getBytes();
 
-            Path path = Paths.get(filePath + "/readme");
+            Path path = Paths.get(filePath + "/readme.txt");
 
             Files.write(path, byteContent);
             System.out.println("Readme file saved successfully at " + filePath);
@@ -144,7 +144,7 @@ public class GetDocumentation {
     private static void getWiki(GHUser owner, String repoName) {
         String ownerName = owner.getLogin();
         String repoURL = "https://github.com/" + ownerName + "/" + repoName + ".wiki.git";
-        String filePath = "documentation/wiki/wiki_" + repoName;
+        String filePath = "wikiTemp/wiki_" + repoName;
         try {
             CloneCommand cloneCommand = Git.cloneRepository()
                     .setURI(repoURL)
@@ -162,7 +162,7 @@ public class GetDocumentation {
      * @param folderName - the name of the folder where the repo was saved
      */
     private static void mergeWiki(String folderName, String new_destination) {
-        String filePath = "documentation/wiki/" + folderName;
+        String filePath = "wikiTemp/" + folderName;
         File folder = new File(filePath);
         if (folder.isDirectory()) {
             File[] files = folder.listFiles();
@@ -217,7 +217,7 @@ public class GetDocumentation {
      * @param destination - location where to write the content
      */
     private static void writeWikiToFile(String content, String destination) {
-        try (FileWriter writer = new FileWriter(destination + "/wiki")) {
+        try (FileWriter writer = new FileWriter(destination + "/wiki.txt")) {
             writer.write(content);
             System.out.println("Combined wiki files saved successfully at: " + destination);
         } catch (IOException e) {
