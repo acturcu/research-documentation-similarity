@@ -32,7 +32,7 @@ public class GetDocumentation {
         List<GHRepository> repos = wrapper.getGitHubRepositories(repositoriesName);
 
         for (GHRepository repo : repos) {
-            String destination = "documentation/" + repo.getName() + "-" + repo.getOwner().getLogin();
+            String destination = "documentation/" + repo.getName() + "_" + repo.getOwner().getLogin();
 
 //            Files.createDirectories(Paths.get(destination));
             File newDirectory = new File(destination);
