@@ -20,18 +20,15 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static helpers.DocumentationParser.getRepositories;
+
 public class GetDocumentation {
     static DocumentationParser parser = new DocumentationParser();
 
     public static void main(String[] args) throws IOException {
         GitHubAPIWrapper wrapper = new GitHubAPIWrapper();
 
-//        TODO: This is placeholder
-        List<String> repositoriesName = List.of("hub4j/github-api");
-//        List<String> repositoriesName = List.of("ldtteam/minecolonies");
-//        List<String> repositoriesName = List.of("exercism/haskell");
-//        List<String> repositoriesName = List.of("joeyajames/Java");
-
+        List<String> repositoriesName = getRepositories();
         List<GHRepository> repos = wrapper.getGitHubRepositories(repositoriesName);
 
         for (GHRepository repo : repos) {

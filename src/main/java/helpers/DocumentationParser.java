@@ -7,11 +7,9 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -239,6 +237,26 @@ public class DocumentationParser {
             extracted.append(link.getUrl()).append(System.lineSeparator());
         })).visit(doc);
         return extracted.toString();
+    }
+
+    /**
+     * Read from file the list of repositories from which to extract data
+     * @return - list of the repositories
+     */
+    public static List<String> getRepositories() {
+        List<String> repos = new ArrayList<>();
+        try {
+            String path = "resources/repositories";
+            File file = new File(path);
+            Scanner reader = new Scanner(file);
+            while(reader.hasNextLine()) {
+                repos.add(reader.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return repos;
+
     }
 
     // Tried to use Apache Lucene to get the list of end words, but I couldn't find the exact package
