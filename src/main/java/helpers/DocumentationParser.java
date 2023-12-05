@@ -3,7 +3,10 @@ package helpers;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.ast.*;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.NodeTraversor;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -194,7 +197,23 @@ public class DocumentationParser {
      */
     public String filterReadmeFile(String readme) {
         Node doc = Parser.builder().build().parse(readme);
-        return extractText(doc);
+        return extractText(doc) + extractHtml(readme);
+    }
+
+    private static String extractHtml(String readme) {
+        org.jsoup.nodes.Document jsoup = Jsoup.parse(readme);
+
+        StringBuilder extracted = new StringBuilder();
+        NodeTraversor.traverse(new org.jsoup.select.NodeVisitor() {
+            @Override
+            public void head(org.jsoup.nodes.@NotNull Node node, int i) {
+                if (node instanceof Element) {
+                    Element element = (Element) node;
+                    extracted.append(element.text()).append(" ");
+                }
+            }
+        }, jsoup);
+        return extracted.toString().trim();
     }
 
     /**
