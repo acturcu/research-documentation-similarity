@@ -134,6 +134,7 @@ public class GetDocumentation {
 
 
     /**
+     * BUG: The wiki file format often contains the character ":". This is an illegal character for naming files on Windows, and therefore the copy operation fails. For now, run this on a Linux machine.
      * Wiki its by itself a different repository, and there are no APIs to access it. The procedure is the following: clone wiki repo, then combine the .md files, and if possible delete the repository
      * @param owner - owner of the repo, a GHUser
      * @param repoName - name of repository/project of which the wiki is wanted
