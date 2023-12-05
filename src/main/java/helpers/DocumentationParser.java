@@ -200,6 +200,11 @@ public class DocumentationParser {
         return extractText(doc) + extractHtml(readme);
     }
 
+    /**
+     * Extracts the html text from a md file
+     * @param readme - text content of a file
+     * @return string representation of the text between html tags
+     */
     private static String extractHtml(String readme) {
         org.jsoup.nodes.Document jsoup = Jsoup.parse(readme);
 
