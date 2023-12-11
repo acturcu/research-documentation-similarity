@@ -36,14 +36,15 @@ public class GetDocumentation {
 
 //            Files.createDirectories(Paths.get(destination));
             File newDirectory = new File(destination);
-            newDirectory.mkdir();
-            writeReadMeToFile(repo.getReadme(), repo.getName(), destination);
-            if(repo.hasWiki()) {
-                getWiki(repo.getOwner(), repo.getName());
-                mergeWiki("wiki_" + repo.getName(), destination);
-            }
+            if (newDirectory.mkdir()) {
+                writeReadMeToFile(repo.getReadme(), repo.getName(), destination);
+                if (repo.hasWiki()) {
+                    getWiki(repo.getOwner(), repo.getName());
+                    mergeWiki("wiki_" + repo.getName(), destination);
+                }
 //          Mind commenting this if you don't need it, since it takes a while to compute
-            getComments(repo, destination);
+                getComments(repo, destination);
+            }
         }
 
     }
