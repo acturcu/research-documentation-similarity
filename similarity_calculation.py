@@ -1,9 +1,11 @@
 import os
+
+from sklearn.manifold import TSNE
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
+from sklearn.decomposition import PCA, TruncatedSVD
 import seaborn as sns
 import numpy as np
 
@@ -44,7 +46,12 @@ def get_similarity_matrix(files):
 
     tfidf_vectorizer = TfidfVectorizer()
     tfidf_matrix = tfidf_vectorizer.fit_transform(content)
-    similarity_matrix = calculate_cosine_similarity(tfidf_matrix, docs)
+    svd = TruncatedSVD(n_components=5, )
+    data = svd.fit_transform(tfidf_matrix)
+
+    # pca = PCA(n_components=5)
+    # reduced_features = pca.fit_transform(tfidf_matrix)
+    similarity_matrix = calculate_cosine_similarity(data, docs)
 
     return similarity_matrix
 
@@ -55,7 +62,7 @@ def calculate_cosine_similarity(matrix, num_docs):
 
     for i in range(num_docs):
         for j in range(num_docs):
-            similarities[i][j] = cosine_similarity(matrix[i], matrix[j])[0][0]
+            similarities[i][j] = cosine_similarity(matrix[i:i + 1], matrix[j:j + 1])[0][0]
 
     return similarities
 
@@ -78,7 +85,7 @@ def draw_heatmap(similarities, title):
     plt.xlabel('Repositories')
     plt.ylabel('Repositories')
     # plt.show()
-    plt.savefig("plots/heatmaps/" + title + '.jpg')
+    plt.savefig("plots/heatmaps/" + title + '2.jpg')
 
 
 # def draw_cluster(similarities, title):
@@ -86,7 +93,6 @@ def draw_heatmap(similarities, title):
 
 # Draw kmeans clusters
 def draw_cluster_kmeans(sim, title):
-
     num_clusters = 3
     kmeans = KMeans(n_clusters=num_clusters)
     kmeans.fit(sim)
@@ -111,7 +117,7 @@ def draw_cluster_kmeans(sim, title):
     plt.ylabel('PC2')
     plt.legend()
     plt.grid(True)
-    plt.savefig("plots/kmeans/" + title + ".jpg")
+    plt.savefig("plots/kmeans/" + title + "2.jpg")
 
     # TODO 3D
     # pca = PCA(n_components=3)
@@ -149,12 +155,28 @@ def initiate_variables():
     # #     files_dictionary[key] = read_processed_folder(key, files_dictionary[key])
     print(files_dictionary.keys())
 
+def evaluate_extra_dimension(dim):
+    content = [read_processed_file("processedDocumentation\\" + folder + "\\" + dim) if dim in files_dictionary[folder]
+               else '' for folder in files_dictionary.keys()]
+    sim =[[0 for _ in range(len(content))] for _ in range(len(content))]
+
+    for i in range(len(content)):
+        for j in range(len(content)):
+            sim[i][j] = len(set(content[i].split()) & set(content[j].split())) / len(set(content[i].split()) | set(content[j].split()))
+    draw_cluster_kmeans(sim, dim.split('.')[0])
+
 
 # R - readme, W - Wiki, C - comments
 combinations = ['R', 'W', 'C', 'RW', 'RC', 'CW', 'RCW']
 
 
 def evaluate_similarity(dim):
+    if not os.path.exists('plots'):
+        os.makedirs('plots')
+    if not os.path.exists('plots/heatmaps'):
+        os.makedirs('plots/heatmaps')
+    if not os.path.exists('plots/kmeans'):
+        os.makedirs('plots/kmeans')
     match dim:
         case 'R':
             sim = get_similarity_matrix(['readme.txt'])
@@ -178,14 +200,15 @@ def evaluate_similarity(dim):
             sim = get_similarity_matrix(['readme.txt', 'comments.txt', 'wiki.txt'])
             draw(sim, 'All dimensions')
 
-# TODO add urls, licenses, dimensionality reduction, doc distribution
+
+# TODO  dimensionality reduction - find number of dimensions, cosine distance < 0 ???, add weight to words
 def main():
     initiate_variables()
-    print(files_dictionary['SPRING-spring-data-mongodb_spring-projects'])
     print("Initiating variables...")
     for dim in combinations:
         evaluate_similarity(dim)
-
+    evaluate_extra_dimension('urls.txt')
+    evaluate_extra_dimension('licenses.txt')
 
 if __name__ == "__main__":
     main()

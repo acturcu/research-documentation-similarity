@@ -101,7 +101,7 @@ spdx_license_identifiers = fetch_spdx_license_list()
 spdx_license_identifiers = spdx_license_identifiers + [license_token.split("-")[0] for license_token in
                                                        spdx_license_identifiers]
 
-# TODO remove files_dictionary
+# Process text by removing stopwords, and by applying lemmatization
 def main():
     input_dir = 'documentation'
     output_dir = 'processedDocumentation'
@@ -109,14 +109,7 @@ def main():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    files_dictionary = {}
-    map_created = False
-
     for root, dirs, files in os.walk(input_dir):
-        if not map_created:
-            map_created = True
-            for dir in dirs:
-                files_dictionary[dir] = []
         urls = []
         licenses = []
 
@@ -137,15 +130,12 @@ def main():
                         output_file.write(processed_text)
                 urls.append(extract_url(text))
                 licenses.append(find_licenses(text))
-                files_dictionary[root.split("\\")[1]].append(file)
         if urls:
             output_file_url = os.path.join(root.replace(input_dir, output_dir), 'urls.txt')
             with open(output_file_url, 'w', encoding='utf-8') as output_file:
                 for urls_child in urls:
                     for url in urls_child:
                         output_file.write(str(url) + '\n')
-
-            files_dictionary[root.split("\\")[1]].append("url.txt")
 
         if licenses:
             licenses_set = set()
@@ -157,8 +147,6 @@ def main():
             with open(output_file_license, 'w', encoding='utf-8') as output_file:
                 for license in licenses_set:
                     output_file.write(str(license) + '\n')
-
-            files_dictionary[root.split("\\")[1]].append("licenses.txt")
 
 
 if __name__ == "__main__":
