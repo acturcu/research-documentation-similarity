@@ -273,8 +273,13 @@ public class DocumentationParser {
             String path = "resources/repositories";
             File file = new File(path);
             Scanner reader = new Scanner(file);
+            int label = -1;
             while(reader.hasNextLine()) {
-                repos.add(reader.nextLine());
+                String line = reader.nextLine();
+                if(!line.startsWith("#"))
+                    repos.add(line + "#####" + label);
+                else
+                    label ++;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -334,6 +339,7 @@ public class DocumentationParser {
         this.languageToExtension.put("java", "java");
         this.languageToExtension.put("python", "py");
         this.languageToExtension.put("c++", "cpp");
+        this.languageToExtension.put("c", "c");
         this.languageToExtension.put("javascript", "js");
         this.languageToExtension.put("ruby", "rb");
         this.languageToExtension.put("c#", "cs");

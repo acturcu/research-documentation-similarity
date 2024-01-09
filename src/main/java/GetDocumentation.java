@@ -27,13 +27,21 @@ public class GetDocumentation {
 
     public static void main(String[] args) throws IOException {
         GitHubAPIWrapper wrapper = new GitHubAPIWrapper();
-
+//TODO Label the data such that result can be evaluated quickly. Idea add expected the label to folder name
         List<String> repositoriesName = getRepositories();
-        List<GHRepository> repos = wrapper.getGitHubRepositories(repositoriesName);
 
+        List<String> notLabeledRepos = repositoriesName.stream().map(x -> x.split("#####")[0]).collect(Collectors.toList());
+        List<String> reposLabels = repositoriesName.stream().map(x -> x.split("#####")[1]).collect(Collectors.toList());
+
+        List<GHRepository> repos = wrapper.getGitHubRepositories(notLabeledRepos);
+        System.out.println("Gathered repositories");
+        File docFolder = new File("documentation");
+        if(!docFolder.exists())
+            docFolder.mkdir();
+        int counter = 0;
         for (GHRepository repo : repos) {
-            String destination = "documentation/" + repo.getName() + "_" + repo.getOwner().getLogin();
-
+            String destination = "documentation/" + repo.getName() + "_" + repo.getOwner().getLogin() + "#####" + reposLabels.get(counter);
+            counter++;
 //            Files.createDirectories(Paths.get(destination));
             File newDirectory = new File(destination);
             if (newDirectory.mkdir()) {

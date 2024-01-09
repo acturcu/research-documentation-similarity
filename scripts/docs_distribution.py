@@ -15,7 +15,7 @@ def calculate_percentage(count, total):
 
 
 def main():
-    folders = os.listdir("processedDocumentation")
+    folders = os.listdir("../processedDocumentation")
 
     readme_percentages = []
     comments_percentages = []
@@ -25,7 +25,7 @@ def main():
         comments_count = 0
         wiki_count = 0
 
-        folder_path = os.path.join("processedDocumentation", folder)
+        folder_path = os.path.join("../processedDocumentation", folder)
         files = os.listdir(folder_path)
         for file in files:
             if file.endswith('.txt'):

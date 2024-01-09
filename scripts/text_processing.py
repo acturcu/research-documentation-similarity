@@ -16,8 +16,6 @@ programming_stop_words = ['copyright', 'license', 'licensed', 'param', 'main', '
                           'development', 'project', 'team', 'member', 'collaborator', 'contributor', 'author',
                           'reviewer', 'manager', 'leader', 'owner', 'admin', 'administrator', 'class', 'interface',
                           'package']
-technical_terms = ['parse', 'print', 'debug', 'exception', 'error', 'warning', 'recognition', 'detection', ]
-# spdx_license_identifiers = fetch_spdx_license_list()
 
 stop_words = set(stopwords.words('english'))
 
@@ -67,7 +65,7 @@ def remove_javadoc_tags(string):
     return '\n'.join(output_lines)
 
 
-# TODO: remove auto-generated comments
+# TODO: remove auto-generated comments from source code
 def process_text(string):
     text_without_url = url_pattern.sub(r'', string)
     removed_javadoc = remove_javadoc_tags(text_without_url)
@@ -101,18 +99,17 @@ spdx_license_identifiers = fetch_spdx_license_list()
 spdx_license_identifiers = spdx_license_identifiers + [license_token.split("-")[0] for license_token in
                                                        spdx_license_identifiers]
 
+
 # Process text by removing stopwords, and by applying lemmatization
 def main():
-    input_dir = 'documentation'
-    output_dir = 'processedDocumentation'
-
+    input_dir = '../documentation'
+    output_dir = '../processedDocumentation'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-
     for root, dirs, files in os.walk(input_dir):
         urls = []
         licenses = []
-
+        print(files)
         for file in files:
             if file.endswith('.txt'):
                 input_file_path = os.path.join(root, file)
