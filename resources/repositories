@@ -6,7 +6,7 @@ spring-projects/spring-data-relational
 spring-projects/spring-data-cassandra
 spring-projects/spring-data-redis
 spring-projects/spring-data-rest
-# minecraft mods and servers
+# minecraft mods
 SleepyTrousers/EnderIO-1.5-1.12
 Flaxbeard/ImmersivePetroleum
 mekanism/Mekanism
@@ -18,16 +18,16 @@ LambdAurora/LambdaBetterGrass
 TerraformersMC/ModMenu
 TerraformersMC/Terrestria
 TerraformersMC/Traverse
+PaperMC/Starlight
+kuohsuanlo/CyberWorld
+#minecraft servers
 PaperMC/Paper
 PaperMC/Velocity
-PaperMC/Starlight
 b3spectacled/modern-beta-fabric
 Akarin-project/Akarin
 IzzelAliz/Arclight
-kuohsuanlo/CyberWorld
 #games
 gaigresearch/tabletopgames
-mouthlessgames/jewelthief
 Farama-Foundation/ViZDoom
 bradharding/doomretro
 freedoom/freedoom

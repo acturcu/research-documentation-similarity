@@ -9,6 +9,7 @@ import requests
 
 url_pattern = re.compile(r'https?://\S+|www\.\S+')
 
+# TODO improve this list
 programming_stop_words = ['copyright', 'license', 'licensed', 'param', 'main', 'function', 'static', 'method', 'get',
                           'set', 'todo', 'fixme', 'bug', 'issue', 'pull', 'request', 'merge', 'conflict', 'commit',
                           'push', 'branch', 'master', 'origin', 'remote', 'local', 'repository', 'clone', 'fork', 'git',
@@ -44,11 +45,13 @@ def find_licenses(text):
     return set(filter(lambda license: len(license) > 1, licenses))
 
 
+# Remove camelCase words from text
 def isCamelCase(string):
     pattern = r'^[a-zA-Z]+([A-Z][a-z]+)+$'
     return bool(re.match(pattern, string))
 
 
+# Remove javadoc tags from comments
 def remove_javadoc_tags(string):
     lines = string.split('\n')
     output_lines = []
@@ -65,7 +68,8 @@ def remove_javadoc_tags(string):
     return '\n'.join(output_lines)
 
 
-# TODO: remove auto-generated comments from source code
+# TODO: remove auto-generated comments from source code. Remove default text from Wikis
+# Clean the data of symbols and other undesirable tokens
 def process_text(string):
     text_without_url = url_pattern.sub(r'', string)
     removed_javadoc = remove_javadoc_tags(text_without_url)
@@ -87,7 +91,6 @@ def process_text(string):
 
 
 # Extract URLs
-
 def extract_url(string):
     urls = url_pattern.findall(string)
     filtered_urls = [re.split(r'\s|\[', url)[0] for url in urls]
@@ -100,12 +103,11 @@ spdx_license_identifiers = spdx_license_identifiers + [license_token.split("-")[
                                                        spdx_license_identifiers]
 
 
-# Process text by removing stopwords, and by applying lemmatization
-def main():
-    input_dir = '../documentation'
-    output_dir = '../processedDocumentation'
+# Save the processed text into new files
+def extract_all_dimensions(input_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
+
     for root, dirs, files in os.walk(input_dir):
         urls = []
         licenses = []
@@ -144,6 +146,11 @@ def main():
             with open(output_file_license, 'w', encoding='utf-8') as output_file:
                 for license in licenses_set:
                     output_file.write(str(license) + '\n')
+
+# Process text by removing stopwords, and by applying lemmatization
+def main():
+    extract_all_dimensions('../documentation', '../processedDocumentation')
+    extract_all_dimensions('../documentationCrossSim', '../processedCrossSim')
 
 
 if __name__ == "__main__":

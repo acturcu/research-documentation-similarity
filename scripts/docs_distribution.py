@@ -47,25 +47,29 @@ def main():
         comments_percentages.append(comments_percentage)
         wiki_percentages.append(wiki_percentage)
 
-    counts = {
-        "Readme": readme_percentages,
-        "Comments": comments_percentages,
-        "Wiki": wiki_percentages
-    }
 
-    fig, ax = plt.subplots(figsize=(12, 6))
-    bottom = np.zeros(len(folders))
+    readmes = sum(readme_percentages)
+    comments = sum(comments_percentages)
+    wikis = sum(wiki_percentages)
 
-    for doc, count in counts.items():
-        p = ax.bar(folders, count, bottom=bottom, label=doc)
-        bottom += count
+    total = readmes + comments + wikis
 
-        ax.bar_label(p, label_type='center')
+    readmes = calculate_percentage(readmes, total)
+    comments = calculate_percentage(comments, total)
+    wikis = calculate_percentage(wikis, total)
 
-    ax.set_title('Percentage of Each Documentation Type')
-    ax.legend()
-    plt.xticks(rotation=90)
-    plt.show()
+    # Create the bar plot
+    categories = ['Readme', 'Wiki', 'Comments']
+
+    print(readmes, wikis, comments)
+    plt.bar(categories, [readmes, wikis, comments], width=0.5, edgecolor='black', color=['lightblue', 'orange', 'green'])
+
+    plt.xlabel('Dimension')
+    plt.ylabel('Percentage')
+    plt.title('Distribution of tokens along Documentation ')
+
+
+    plt.savefig('../plots/doc_distribution.jpg')
 
 
 if __name__ == '__main__':

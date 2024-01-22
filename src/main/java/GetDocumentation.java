@@ -14,10 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static helpers.DocumentationParser.getRepositories;
@@ -26,9 +23,57 @@ public class GetDocumentation {
     static DocumentationParser parser = new DocumentationParser();
 
     public static void main(String[] args) throws IOException {
-        GitHubAPIWrapper wrapper = new GitHubAPIWrapper();
-//TODO Label the data such that result can be evaluated quickly. Idea add expected the label to folder name
-        List<String> repositoriesName = getRepositories();
+        GitHubAPIWrapper wrapper = new GitHubAPIWrapper("acturcu", "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");
+
+        ownExperiment(wrapper);
+        crossSimValidation(wrapper);
+
+
+
+    }
+
+    private static void crossSimValidation(GitHubAPIWrapper wrapper) throws IOException{
+        List<String> repositoriesName = getRepositories(false);
+        List<GHRepository> repos = new ArrayList<>();
+
+        for (String repo : repositoriesName) {
+            try {
+                repos.add(wrapper.getGitHubRepository(repo));
+            } catch (Exception e) {
+//                doesNotExist.add(repo);
+                System.err.println("get repo error");
+                e.printStackTrace();
+            }
+        }
+//                wrapper.getGitHubRepositories(repostitoriesName);
+
+        File docFolder = new File("documentationCrossSim");
+        if(!docFolder.exists())
+            docFolder.mkdir();
+
+        for (GHRepository repo : repos) {
+            String destination = "documentationCrossSim/" + repo.getName() + "_" + repo.getOwner().getLogin();
+            File newDir = new File(destination);
+            if (newDir.mkdir()) {
+                try {
+                    writeReadMeToFile(repo.getReadme(), repo.getName(), destination);
+                } catch (Exception e) {
+                    System.err.println("Readme not available");
+                    e.printStackTrace();
+                }
+
+                if (repo.hasWiki()) {
+                    getWiki(repo.getOwner(), repo.getName());
+                    mergeWiki("wiki_" + repo.getName(), destination);
+                }
+                getComments(repo, destination);
+            }
+        }
+//        System.out.println(doesNotExist);
+    }
+
+    private static void ownExperiment(GitHubAPIWrapper wrapper) throws IOException {
+        List<String> repositoriesName = getRepositories(true);
 
         List<String> notLabeledRepos = repositoriesName.stream().map(x -> x.split("#####")[0]).collect(Collectors.toList());
         List<String> reposLabels = repositoriesName.stream().map(x -> x.split("#####")[1]).collect(Collectors.toList());
@@ -54,7 +99,6 @@ public class GetDocumentation {
                 getComments(repo, destination);
             }
         }
-
     }
 
     /**
@@ -173,14 +217,23 @@ public class GetDocumentation {
         File folder = new File(filePath);
         if (folder.isDirectory()) {
             File[] files = folder.listFiles();
+            files = filterMdFiles(files);
             if(files != null) {
-                if (files.length > 2 ){
-                    //ignore .git folder
-                    mergeFiles(Arrays.copyOfRange(files, 1, files.length), new_destination);
-                }
+                System.out.println(Arrays.toString(files));
+//                if (files.length > 2 ){
+//                    //ignore .git folder
+//                    mergeFiles(Arrays.copyOfRange(files, 1, files.length), new_destination);
+//                }
+                mergeFiles(files, new_destination);
                 deleteFolder(folder);
             }
         }
+    }
+
+    private static File[] filterMdFiles(File[] files) {
+        return Arrays.stream(files)
+                .filter(file -> file.isFile() && file.getName().endsWith(".md"))
+                .toArray(File[]::new);
     }
 
     /**

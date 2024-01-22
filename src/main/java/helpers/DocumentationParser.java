@@ -267,17 +267,21 @@ public class DocumentationParser {
      * Read from file the list of repositories from which to extract data
      * @return - list of the repositories
      */
-    public static List<String> getRepositories() {
+    public static List<String> getRepositories(boolean source) {
         List<String> repos = new ArrayList<>();
+        String path = source ? "resources/repositories" : "resources/crosssim";
         try {
-            String path = "resources/repositories";
             File file = new File(path);
             Scanner reader = new Scanner(file);
             int label = -1;
             while(reader.hasNextLine()) {
                 String line = reader.nextLine();
-                if(!line.startsWith("#"))
-                    repos.add(line + "#####" + label);
+                if(!line.startsWith("#")) {
+                    if (source)
+                        repos.add(line + "#####" + label);
+                    else
+                        repos.add(line);
+                }
                 else
                     label ++;
             }

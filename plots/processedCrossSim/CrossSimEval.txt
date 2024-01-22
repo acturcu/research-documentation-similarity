@@ -1,0 +1,77 @@
+All dimensions
+('aliumujib/Orin', 'kabouzeid/Phonograph', 0.995050825787972) not considered
+('caelum/vraptor4', 'caelum/vraptor', 0.9828145523946419) 4
+('pentaho/big-data-plugin', 'pentaho/pentaho-hadoop-shims', 0.979629182270215) 4
+('white-cat/jeeweb-mybatis', 'white-cat/jeeweb', 0.977693964765469) 4
+('omerio/appstart', 'ykameshrao/spring-mvc-angular-js-hibernate-bootstrap-java-single-page-jwt-auth-rest-api-webapp-framework', 0.9667164819661218) not considered
+('apache/cayenne', 'jclouds/jclouds-karaf', 0.9661124628299504) not considered
+('sriksun/Ivory', 'jclouds/jclouds-karaf', 0.9616802504108349) not considered
+('apache/cayenne', 'sriksun/Ivory', 0.9600710274745189) not considered
+('jclouds/jclouds-karaf', 'castagna/jena-grande', 0.9593991091476636) not considered
+('apache/cayenne', 'apache/openjpa', 0.9587138975330052) not considered
+Comments + Wiki
+('florent37/Freezer', 'florent37/RxAndroidOrm', 0.9973266379802109) not considered
+('aliumujib/Orin', 'kabouzeid/Phonograph', 0.9972091252022601) not considered
+('jatrost/hadoop-dns-mining', 'castagna/jena-grande', 0.9953230534515455) not considered
+('jatrost/hadoop-dns-mining', 'sriksun/Ivory', 0.9911861911284129) not considered
+('sriksun/Ivory', 'castagna/jena-grande', 0.989428113007508) 2
+('castagna/freebase2rdf', 'jatrost/hadoop-dns-mining', 0.9893691991703353) not considered
+('jatrost/hadoop-dns-mining', 'castagna/jena-examples', 0.9886421455051063) not considered
+('castagna/freebase2rdf', 'castagna/jena-grande', 0.9882911953379223) not considered
+('castagna/jena-examples', 'castagna/jena-grande', 0.9874570172867663) not considered
+('caelum/vraptor4', 'caelum/vraptor', 0.9837081584025013) 4
+Comments Only
+('florent37/Freezer', 'florent37/RxAndroidOrm', 0.9972613986579533) not considered
+('aliumujib/Orin', 'kabouzeid/Phonograph', 0.9971803956758486) not considered
+('F4bwDP6a6W/spring-mvc-mini', 'spring-attic/spring-mvc-showcase', 0.9966052979792364) not considered
+('jatrost/hadoop-dns-mining', 'castagna/jena-grande', 0.9953211188940646) not considered
+('jatrost/hadoop-dns-mining', 'sriksun/Ivory', 0.9914980540733729) not considered
+('sriksun/Ivory', 'castagna/jena-grande', 0.989763518024849) 2
+('castagna/freebase2rdf', 'jatrost/hadoop-dns-mining', 0.9893898451131407) not considered
+('jatrost/hadoop-dns-mining', 'castagna/jena-examples', 0.9886560385122345) not considered
+('castagna/freebase2rdf', 'castagna/jena-grande', 0.9883340811848166) not considered
+('castagna/jena-examples', 'castagna/jena-grande', 0.9874851227867238) not considered
+Readme + Comments
+('aliumujib/Orin', 'kabouzeid/Phonograph', 0.9949870217998503) not considered
+('caelum/vraptor4', 'caelum/vraptor', 0.982728174822966) 4
+('pentaho/big-data-plugin', 'pentaho/pentaho-hadoop-shims', 0.979492428627128) 4
+('white-cat/jeeweb-mybatis', 'white-cat/jeeweb', 0.9776148261697077) 4
+('subutai-io/peer-os', 'ykameshrao/spring-mvc-angular-js-hibernate-bootstrap-java-single-page-jwt-auth-rest-api-webapp-framework', 0.9767338608997659) not considered
+('omerio/appstart', 'ykameshrao/spring-mvc-angular-js-hibernate-bootstrap-java-single-page-jwt-auth-rest-api-webapp-framework', 0.9666918569839628) not considered
+('apache/cayenne', 'jclouds/jclouds-karaf', 0.9652929698329471) nc
+('sriksun/Ivory', 'jclouds/jclouds-karaf', 0.9618974469914865) nc
+('apache/cayenne', 'sriksun/Ivory', 0.9597229673835513) nc
+('jclouds/jclouds-karaf', 'castagna/jena-grande', 0.9589203717906898) nc
+Readme + Wiki
+('white-cat/jeeweb-mybatis', 'white-cat/jeeweb', 0.8532286146514622) 4
+('confluentinc/kafka-connect-elasticsearch', 'confluentinc/kafka-connect-hdfs', 0.7517637379009364) nc
+('endgameinc/elasticsearch-river-kafka', 'mariamhakobyan/elasticsearch-river-kafka', 0.6151298412801676) 4
+('thymeleaf/thymeleaf-spring', 'thymeleaf/thymeleafexamples-springmail', 0.6144566353792048) nc
+('bergerkiller/BKCommonLib', 'ryanhoo/StylishMusicPlayer', 0.6055606251951606) nc
+('lukaspili/Auto-Mortar', 'techery/presenta', 0.5996428281061632) nc
+('P7h/storm-camel-example', 'P7h/StormTweetsSentimentD3Viz', 0.5972039624636494) nc
+('hefuyicoder/ListenerMusicPlayer', 'ryanhoo/StylishMusicPlayer', 0.5394567428729694) nc
+('markzhai/LyricHere', 'asr-pub/LyricViewDemo', 0.5247853899690391) nc
+('socialsignin/spring-social-security-demo', 'socialsignin/spring-social-security', 0.5165856125382936) nc
+Readme Only
+('erdincyilmazel/Cambridge', 'otto-de-legacy/jsonhome', 0.9998822716376654) nc
+('naman14/Timber', 'Mavamaarten/vk_music_android', 0.999678472924105) nc
+('stormpath/stormpath-shiro', 'zkoss/zkspreadsheet', 0.9996353541960785) nc
+('elaatifi/orika', 'SpringOne2GX-2014/reactive-geocoder', 0.9994492001106559) nc
+('RestOpenGov/RestOpenGov', 'crazyacking/zeekEye', 0.9994101452193385) nc
+('sreichholf/dreamDroid', 'SpongeBobSun/Prodigal', 0.9992328325927171) nc
+('white-cat/jeeweb-mybatis', 'white-cat/jeeweb', 0.9992282761563118) 4
+('OpenHFT/Chronicle-Wire', 'ngs-doo/dsl-json', 0.9992017618615904) nc
+('lucko/helper', 'galan/packtag', 0.9990377413962703) nc
+('orbit/orbit', 'veraPDF/veraPDF-library', 0.9989449220697202)
+Wiki Only TOATE AU ACELASI TEXT PUN PARIU (all are welcome to....)
+('googlearchive/android-credentials', 'docusign/docusign-esign-java-client', 1.0)
+('googlearchive/android-credentials', 'ngs-doo/dsl-json', 1.0)
+('googlearchive/android-credentials', 'rmagen/elastic-gremlin', 1.0)
+('googlearchive/android-credentials', 'srecon/elasticsearch-cassandra-river', 1.0)
+('googlearchive/android-credentials', 'alexnederlof/Jasper-report-maven-plugin', 1.0)
+('googlearchive/android-credentials', 'jcabi/jcabi-xml', 1.0)
+('googlearchive/android-credentials', 'jirutka/validator-collection', 1.0)
+('docusign/docusign-esign-java-client', 'ngs-doo/dsl-json', 1.0)
+('docusign/docusign-esign-java-client', 'rmagen/elastic-gremlin', 1.0)
+('docusign/docusign-esign-java-client', 'srecon/elasticsearch-cassandra-river', 1.0)
