@@ -23,7 +23,7 @@ public class GetDocumentation {
     static DocumentationParser parser = new DocumentationParser();
 
     public static void main(String[] args) throws IOException {
-        GitHubAPIWrapper wrapper = new GitHubAPIWrapper("acturcu", "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");
+        GitHubAPIWrapper wrapper = new GitHubAPIWrapper();
 
         ownExperiment(wrapper);
         crossSimValidation(wrapper);
