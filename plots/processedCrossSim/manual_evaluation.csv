@@ -1,0 +1,49 @@
+Repo A,Topic A,Repo B,Topic B,Scenarios Considered [R]eadme [W]iki [C]omments ,Evaluation
+aliumujib/Orin,Music Player,kabouzeid/Phonograph,Music Player,RWC + CW + C + RC,Highly similar
+caelum/vraptor4,MVC Framework,caelum/vraptor,MVC Framework,RWC + CW + RC,Highly similar
+pentaho/big-data-plugin,Big data analysis,pentaho/pentaho-hadoop-shims,Big data analysis,RWC + RC,Highly similar
+white-cat/jeeweb-mybatis,MVC Framework,white-cat/jeeweb,MVC Framework,RWC + RW + RC + R,Highly similar
+omerio/appstart,Webapp,ykameshrao/spring-mvc-angular-js-hibernate-bootstrap-java-single-page-jwt-auth-rest-api-webapp-framework,Webapp,RWC + RC,Similar
+apache/cayenne,Data management,jclouds/jclouds-karaf,Data management,RWC + RC,Similar
+sriksun/Ivory,Data management,jclouds/jclouds-karaf,Data management,RWC + RC,Similar
+apache/cayenne,Data management,sriksun/Ivory,Data management,RWC + RC,Similar
+jclouds/jclouds-karaf,Data management,castagna/jena-grande,Data management,RWC + RC,Similar
+apache/cayenne,Data management,apache/openjpa,Database,RWC,Dissimilar
+florent37/Freezer,Data management,florent37/RxAndroidOrm,Data management,CW + C,Highly similar
+jatrost/hadoop-dns-mining,Data management,castagna/jena-grande,Data management,CW + C,A bit similar
+jatrost/hadoop-dns-mining,Data management,sriksun/Ivory,Data management,CW + C,A bit similar
+sriksun/Ivory,Data management,castagna/jena-grande,Data management,CW + C,Similar
+castagna/freebase2rdf,Data management,jatrost/hadoop-dns-mining,Data management,CW + C,Similar
+jatrost/hadoop-dns-mining,Data management,castagna/jena-examples,Data management,CW + C,Similar
+castagna/freebase2rdf,Data management,castagna/jena-grande,Data management,CW + C,Highly similar
+castagna/jena-examples,Data management,castagna/jena-grande,Data management,CW + C,Highly similar
+F4bwDP6a6W/spring-mvc-mini,MVC Framework,spring-attic/spring-mvc-showcase,MVC Framework,C,Similar
+confluentinc/kafka-connect-elasticsearch,Data connector,confluentinc/kafka-connect-hdfs,Data connector,RW,Similar
+endgameinc/elasticsearch-river-kafka,Kafka River Plugin,mariamhakobyan/elasticsearch-river-kafka,Kafka River Plugin,RW,Highly similar
+thymeleaf/thymeleaf-spring,Framework for Spring,thymeleaf/thymeleafexamples-springmail,Implementation of the framework,RW,Similar
+bergerkiller/BKCommonLib,Plugin library,ryanhoo/StylishMusicPlayer,Music Player,RW,Highly dissimilar
+lukaspili/Auto-Mortar,Flow and Mortar generator,techery/presenta,Flow and Mortar generator,RW,Highly similar
+P7h/storm-camel-example,Weather visualization,P7h/StormTweetsSentimentD3Viz,Weather visualization,RW,Highly similar
+hefuyicoder/ListenerMusicPlayer,Music Player,ryanhoo/StylishMusicPlayer,Music Player,RW,Highly similar
+markzhai/LyricHere,Lyrics viewer,asr-pub/LyricViewDemo,Lyrics viewer,RW,Highly similar
+socialsignin/spring-social-security-demo,Implementation of framework,socialsignin/spring-social-security,Framework for Spring,RW,Highly similar
+subutai-io/peer-os,P2P platform,ykameshrao/spring-mvc-angular-js-hibernate-bootstrap-java-single-page-jwt-auth-rest-api-webapp-framework,MVC Framework,RC,Highly dissimilar
+erdincyilmazel/Cambridge,Web development,otto-de-legacy/jsonhome,API handler,R,Dissimilar
+naman14/Timber,Music Player,Mavamaarten/vk_music_android,Music Player,R,Highly similar
+stormpath/stormpath-shiro,Apache plugin,zkoss/zkspreadsheet,Spreadsheet ,R,Highly dissimilar
+elaatifi/orika,Java Bean mapping,SpringOne2GX-2014/reactive-geocoder,Geocoding,R,Highly dissimilar
+RestOpenGov/RestOpenGov,Governmental app,crazyacking/zeekEye,Web crawler,R,Highly dissimilar
+sreichholf/dreamDroid,Remote controller,SpongeBobSun/Prodigal,Music Player,R,Highly dissimilar
+OpenHFT/Chronicle-Wire,Data serialization ,ngs-doo/dsl-json,JSON handler,R,A bit similar
+lucko/helper,APIs for Bukkit plugins,galan/packtag,JSP Taglib,R,Highly dissimilar
+orbit/orbit,Asynchronous handler,veraPDF/veraPDF-library,PDF/A validation,R,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,docusign/docusign-esign-java-client,eSignature API,W,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,ngs-doo/dsl-json,JSON handler,W,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,rmagen/elastic-gremlin,TinkerPop 3 implementation,W,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,srecon/elasticsearch-cassandra-river,Cassandra cluster extractor,W,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,alexnederlof/Jasper-report-maven-plugin,Jasper Report plugin,W,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,jcabi/jcabi-xml,XML Parser,W,Highly dissimilar
+googlearchive/android-credentials,Android Studio projects example,jirutka/validator-collection,Bean Validation,W,Highly dissimilar
+docusign/docusign-esign-java-client,eSignature API,ngs-doo/dsl-json,JSON handler,W,Highly dissimilar
+docusign/docusign-esign-java-client,eSignature API,rmagen/elastic-gremlin,TinkerPop 3 implementation,W,Highly dissimilar
+docusign/docusign-esign-java-client,eSignature API,srecon/elasticsearch-cassandra-river,Cassandra cluster extractor,W,Highly dissimilar

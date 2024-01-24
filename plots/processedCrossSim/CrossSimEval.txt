@@ -64,7 +64,7 @@ Readme Only
 ('OpenHFT/Chronicle-Wire', 'ngs-doo/dsl-json', 0.9992017618615904) nc
 ('lucko/helper', 'galan/packtag', 0.9990377413962703) nc
 ('orbit/orbit', 'veraPDF/veraPDF-library', 0.9989449220697202)
-Wiki Only TOATE AU ACELASI TEXT PUN PARIU (all are welcome to....)
+Wiki Only
 ('googlearchive/android-credentials', 'docusign/docusign-esign-java-client', 1.0)
 ('googlearchive/android-credentials', 'ngs-doo/dsl-json', 1.0)
 ('googlearchive/android-credentials', 'rmagen/elastic-gremlin', 1.0)

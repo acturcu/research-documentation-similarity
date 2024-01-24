@@ -25,6 +25,7 @@ research-turcu.iml
 
 .idea/*
 documentation/*
+documentationCrossSim/*
 processedDocumentation/*
 processedCrossSim/*
 plots/heatmaps/*
