@@ -8,11 +8,11 @@ This repository is the code support for a paper that aims to study the importanc
 Two experiments were performed. The first one aims to observe the behavioral tendencies of our methodology applied to a small dataset, while the second one aims to validate our results. By evaluating them, we found sufficient data that supported our presented conclusion: documentation represents a valuable asset in gathering a pool of similar applications.        
 
 ## Experimental setup
-To reproduce our experiments a couple of scripts must be run, in both Java (14) and Python (3.10). The required packages for the Python scrips are availble in 
+To reproduce our experiments a couple of scripts must be run, in both Java (14) and Python (3.10). The required packages for the Python scrips are available in 
 requirements.txt. To install them, you can use `pip install -r requirements.txt`
 
 Following, firstly you have to run `GetDocumentation.java` (src/main/java) to extract the documentation locally. 
-Next, the Python scripts in folder scripts/ must be run in the following order: `text_processing.py`, `similarity_calculation.py`,
+Next, the Python scripts in folder `scripts/` must be run in the following order: `text_processing.py`, `similarity_calculation.py`,
 `crosssim_evaluation.py` and lastly `docs_distribution.py`.
 
 Three scenarios for handling missing documentation have been analyzed. To gather an accuracy plot with all the scenarios,
@@ -20,7 +20,7 @@ you have to uncomment lines 155-222, 252-297 and 72 in `scripts/similarity_calcu
 
 ## Results
 The results of our experiments, including plots are available in the folder `plots/`, and the corresponding subfolders. Due to the size of the datasets, 
-we decided to include only the raw data in the repository, without heatmaps or cluster maps in `plots/processedDocumentation/` and `plots/processedCrossSim`. 
+we decided to include only the raw data in the repository, without heatmaps or cluster maps in `plots/processedDocumentation/` (it is worth noting that the results saved here contain the labels assigned during our evaluation process) and `plots/processedCrossSim`. 
 In addition, a manually evaluation of the CrossSim dataset is available in `plots/processedDocumentation/manual_evaluation.csv`. 
 
 
