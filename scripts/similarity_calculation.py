@@ -10,6 +10,8 @@ from sklearn.decomposition import PCA, TruncatedSVD
 import seaborn as sns
 import numpy as np
 import scipy.sparse as sp
+from datetime import datetime
+import random
 
 files_dictionary = {}
 repo_clusters = {}
@@ -67,8 +69,7 @@ def get_similarity_matrix(files, input_dir):
     print('dimensionality reduction performed')
     similarity_matrix = calculate_cosine_similarity(data, docs)
 
-    # similarity_matrix = calculate_cosine_similarity(tfidf_matrix, docs)
-    # plot_accuracy_three_options(tfidf_matrix, docs)
+    # plot_accuracy_three_options(data, docs)
     print('similarity matrix calculated')
     return similarity_matrix
 
@@ -102,6 +103,7 @@ def draw_heatmap(similarities, title):
     plt.xlabel('Repositories')
     plt.ylabel('Repositories')
     plt.savefig("../plots/heatmaps/" + title + '.jpg')
+    plt.close()
 
 
 # Draw kmeans clusters
@@ -132,13 +134,15 @@ def draw_cluster_kmeans(sim, title):
     plt.legend(loc='best')
     plt.grid(True)
     plt.savefig("../plots/kmeans/" + title + ".jpg")
+    plt.close()
 
 
 # Plot the accuracy percentages of kmeans clustering
 def plot_accuracy():
     print(accuracy_list)
     plt.figure(figsize=(8, 6))
-    plt.plot(accuracy_list, marker='o', linestyle='-')
+    # plt.plot(accuracy_list, marker='o', linestyle='-')
+    plt.bar(range(len(accuracy_list)), accuracy_list)
     plt.title('K Means Clustering')
     plt.xlabel('Scenario')
     plt.ylabel('Accuracy (%)')
@@ -146,26 +150,40 @@ def plot_accuracy():
     plt.xticks(range(len(scenarios)), scenarios)
     plt.grid(True)
     plt.savefig("../plots/accuracy.jpg")
+    plt.close()
 
-    # plt.figure(figsize=(8, 6))
-    # plt.plot(accuracy_list0,  marker='o', linestyle='-', label='Initial similarity score 0')
-    # plt.plot(accuracy_list05,  marker='o', linestyle='-', label='Initial similarity score 0.5')
-    # plt.plot(accuracy_list1,  marker='o', linestyle='-', label='Initial similarity score 1')
+    # plt.figure(figsize=(12, 9))
+    # plt.rcParams.update({'font.size': 12})
+    # bar_positions1 = np.arange(len(accuracy_list0))
+    # bar_positions2 = bar_positions1 + 0.25
+    # bar_positions3 = bar_positions1 + 0.5
+    # bar_width = 0.25
+    #
+    # plt.bar(bar_positions1, accuracy_list0, width=bar_width, label='Initial similarity score 0')
+    # plt.bar(bar_positions2, accuracy_list05, width=bar_width, label='Initial simialrit score 0.5')
+    # plt.bar(bar_positions3, accuracy_list1, width=bar_width, label='Initial similarity score 1')
+    #
+    #
+    #
     # plt.title('K Means Clustering Accuracy')
     # plt.xlabel('Scenario')
     # plt.ylabel('Accuracy (%)')
-    # scenarios = combinations + ["URLS", "LICENSES"]
-    # plt.xticks(range(len(scenarios)), scenarios)  
+    # scenarios = ['Readme only', 'Wiki only', 'Comments only', 'Readme + Wiki', 'Readme + Comments', 'Comments + Wiki', 'All dimensions'] + ["URLS", "LICENSES"]
+    # plt.xticks(bar_positions1 + bar_width, scenarios, rotation=15)
     # plt.grid(True)
     # plt.legend(loc='best')
     # # plt.show()
-    # plt.savefig("../plots/accuracyAll4.jpg")
+    # current_time = datetime.now().time()
+    # mta = random.randint(0, 100000000)
+    # plt.savefig("../plots/accuracyAll" + str(current_time).split(':')[1] + str(mta) + ".jpg")
+    # plt.close()
 
 
 # accuracy_list0 = []
 # accuracy_list05 = []
 # accuracy_list1 = []
 # def plot_accuracy_three_options(matrix, num_docs):
+#
 #     similarities0 = [[0 for _ in range(num_docs)] for _ in range(num_docs)]
 #     for i in range(num_docs):
 #         for j in range(num_docs):
@@ -174,33 +192,33 @@ def plot_accuracy():
 #     for i in range(num_docs):
 #         for j in range(num_docs):
 #             similarities05[i][j] = cosine_similarity(matrix[i:i + 1], matrix[j:j + 1])[0][0]
-
+#
 #     similarities1 = [[1 for _ in range(num_docs)] for _ in range(num_docs)]
 #     for i in range(num_docs):
 #         for j in range(num_docs):
 #             similarities1[i][j] = cosine_similarity(matrix[i:i + 1], matrix[j:j + 1])[0][0]
-
+#
 #     expected_labels = [int(folder) for folder in map((lambda x: x.split("#####")[1]), files_dictionary.keys())]
-
+#
 #     kmeans0 = KMeans(n_clusters=num_clusters)
 #     kmeans0.fit(similarities0)
-
+#
 #     cluster_labels0 = kmeans0.labels_
-
+#
 #     accuracy_list0.append(adjusted_rand_score(expected_labels, cluster_labels0.tolist()) * 100)
-
+#
 #     kmeans05 = KMeans(n_clusters=num_clusters)
 #     kmeans05.fit(similarities05)
-
+#
 #     cluster_labels05 = kmeans05.labels_
-
+#
 #     accuracy_list05.append(adjusted_rand_score(expected_labels, cluster_labels05.tolist()) * 100)
-
+#
 #     kmeans1 = KMeans(n_clusters=num_clusters)
 #     kmeans1.fit(similarities1)
-
+#
 #     cluster_labels1 = kmeans1.labels_
-
+#
 #     accuracy_list1.append(adjusted_rand_score(expected_labels, cluster_labels1.tolist()) * 100)
 
 
@@ -230,6 +248,17 @@ def evaluate_extra_dimension(dim, directory):
                     set(content[i].split()) | set(content[j].split()))
             else:
                 sim[i][j] = 0.5
+    draw_cluster_kmeans(sim, dim.split('.')[0])
+    # sim0 = [[0 for _ in range(len(content))] for _ in range(len(content))]
+    #
+    # for i in range(len(content)):
+    #     for j in range(len(content)):
+    #         if len(set(content[i].split()) | set(content[j].split())) != 0:
+    #             sim0[i][j] = len(set(content[i].split()) & set(content[j].split())) / len(
+    #                 set(content[i].split()) | set(content[j].split()))
+    #         else:
+    #             sim0[i][j] = 0
+    #
 
     # sim05 = [[0.5 for _ in range(len(content))] for _ in range(len(content))]
     #
@@ -252,7 +281,7 @@ def evaluate_extra_dimension(dim, directory):
     #             sim1[i][j] = 1
     #
     # kmeans = KMeans(n_clusters=num_clusters)
-    # kmeans.fit(sim)
+    # kmeans.fit(sim0)
     # cluster_labels = kmeans.labels_
     # expected_labels = [int(folder) for folder in map((lambda x: x.split("#####")[1]), files_dictionary.keys())]
     # accuracy_list0.append(adjusted_rand_score(expected_labels, cluster_labels.tolist()) * 100)
@@ -266,8 +295,6 @@ def evaluate_extra_dimension(dim, directory):
     # kmeans1.fit(sim1)
     # cluster_labels1 = kmeans1.labels_
     # accuracy_list1.append(adjusted_rand_score(expected_labels, cluster_labels1.tolist()) * 100)
-
-    draw_cluster_kmeans(sim, dim.split('.')[0])
 
 
 # save the similarity matrix in a file, a heatmap was too dense to read
@@ -292,7 +319,6 @@ def pretty_print_matrix(sim_matrix, title, directory):
 
 # R - readme, W - Wiki, C - comments
 combinations = ['R', 'W', 'C', 'RW', 'RC', 'CW', 'RCW']
-
 
 # Evaluate the similarity of repositories for all combinations of dimensions
 def evaluate_similarity(dim, directory):

@@ -30,7 +30,7 @@ def main():
     titles = []
     for root, dirs, files in os.walk('../plots/processedCrossSim'):
         for file in files:
-            if file != 'CrossSimEval.txt':
+            if file != 'CrossSimEval.txt' and file != 'manual_evaluation.csv':
                 titles.append(file.strip().split('.')[0])
                 final.append(get_top_sim(os.path.join(root, file)))
     with open('../plots/processedCrossSim' + '/CrossSimEval.txt', 'w') as file:

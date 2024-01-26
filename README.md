@@ -16,7 +16,13 @@ Next, the Python scripts in folder scripts/ must be run in the following order: 
 `crosssim_evaluation.py` and lastly `docs_distribution.py`.
 
 Three scenarios for handling missing documentation have been analyzed. To gather an accuracy plot with all the scenarios,
-you have to uncomment lines 150-204, 234-272 and 71 in `scripts/similarity_calculation.py`.
+you have to uncomment lines 155-222, 252-297 and 72 in `scripts/similarity_calculation.py`.
+
+## Results
+The results of our experiments, including plots are available in the folder `plots/`, and the corresponding subfolders. Due to the size of the datasets, 
+we decided to include only the raw data in the repository, without heatmaps or cluster maps in `plots/processedDocumentation/` and `plots/processedCrossSim`. 
+In addition, a manually evaluation of the CrossSim dataset is available in `plots/processedDocumentation/manual_evaluation.csv`. 
+
 
 ## Acknowledgment
 I would like to acknowledge the developers of [CrossSim](https://github.com/crossminer/CrossSim) for using their evaluated repositories dataset during our validation experiment.
