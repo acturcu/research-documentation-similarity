@@ -7,6 +7,8 @@ This repository is the code support for a paper that aims to study the importanc
 
 Two experiments were performed. The first one aims to observe the behavioral tendencies of our methodology applied to a small dataset, while the second one aims to validate our results. By evaluating them, we found sufficient data that supported our presented conclusion: documentation represents a valuable asset in gathering a pool of similar applications.        
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10573230.svg)](https://doi.org/10.5281/zenodo.10573230)
+
 ## Experimental setup
 To reproduce our experiments a couple of scripts must be run, in both Java (14) and Python (3.10). The required packages for the Python scrips are available in 
 requirements.txt. To install them, you can use `pip install -r requirements.txt`
